@@ -1,12 +1,22 @@
-# 🛡️ Audio & Vishing Forensics Hub (NZ Threat Context)
+<div align="center">
 
-An automated dual-track acoustic and semantic forensics platform engineered to triage voice phishing (vishing), impersonation attacks, and synthetic audio threats targeting New Zealand telecommunications.
+# 🛡️ Dual-Track Audio & Vishing Forensics Hub
+### Threat-Informed Incident Triage & Voice Biometrics for New Zealand Telecommunications
 
-![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue)
-![Platform](https://img.shields.io/badge/Platform-macOS%20Apple%20Silicon-lightgrey)
-![Framework](https://img.shields.io/badge/Framework-Streamlit-red)
-![STT Engine](https://img.shields.io/badge/STT-Faster--Whisper-green)
-![Signal Analysis](https://img.shields.io/badge/Signal-SciPy%20%7C%20SoundFile-orange)
+![Python Version](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-macOS%20Apple%20Silicon%20(M1%2FM2%2FM3)-000000?style=for-the-badge&logo=apple&logoColor=white)
+![Engine](https://img.shields.io/badge/ASR-Faster--Whisper%20(CTranslate2)-00A67E?style=for-the-badge)
+![UI Framework](https://img.shields.io/badge/Dashboard-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Jurisdiction](https://img.shields.io/badge/Context-New%20Zealand%20(NZ)-00247D?style=for-the-badge)
+![Security Domain](https://img.shields.io/badge/SecOps-Tier--1%20SOC%20Forensics-critical?style=for-the-badge)
+
+<p align="center">
+  <b>A fully localized, zero-cloud triage platform designed to correlate acoustic physical layer anomalies with New Zealand social engineering vectors.</b>
+</p>
+
+</div>
+
+---
 
 ---
 
