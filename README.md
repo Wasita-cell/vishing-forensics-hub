@@ -18,8 +18,6 @@
 
 ---
 
----
-
 ## 📌 Executive Overview
 
 Vishing and authorized push payment (APP) fraud targeting New Zealand banking customers (e.g., ANZ, ASB, BNZ, Westpac) and government agencies (IRD, NZTA, CERT NZ) continue to rise. 
@@ -44,18 +42,18 @@ This platform bridges the gap between raw telecom audio recordings and SecOps in
          |                                             |
          v                                             v
   [ Track A: Signal Domain ]               [ Track B: Semantic Domain ]
-  - SciPy Welch Power Spectral Density     - Faster-Whisper (Quantized int8)
-  - PSTN Cutoff Edge Detection (~7.5 kHz)  - Streaming Progress Engine
-  - High-Frequency (HF) Energy Ratio       - NZ Banking Threat Rulebase
-  - Synthetic / TTS Suspicion Score        - Urgency & Coercion NLP Heuristics
+- SciPy Welch Power Spectral Density     - Faster-Whisper (Quantized int8)
+- PSTN Cutoff Edge Detection (~7.5 kHz)  - Streaming Progress Engine
+- High-Frequency (HF) Energy Ratio       - NZ Banking Threat Rulebase
+- Synthetic / TTS Suspicion Score        - Urgency & Coercion NLP Heuristics
          |                                             |
          +----------------------+----------------------+
                                 |
                                 v
                [ Track C: Lightweight Diarization ]
-             - Acoustic Feature Extraction (RMS + ZCR + PSD)
-             - 2-Means Cluster Separation (SPEAKER_00 vs SPEAKER_01)
-             - Threat Attribution (Maps malicious triggers -> SCAMMER role)
+- Acoustic Feature Extraction (RMS + ZCR + PSD)
+- 2-Means Cluster Separation (SPEAKER_00 vs SPEAKER_01)
+- Threat Attribution (Maps malicious triggers -> SCAMMER role)
                                 |
                                 v
             [ Dual-Track Correlation & Risk Assessment ]
@@ -68,37 +66,34 @@ This platform bridges the gap between raw telecom audio recordings and SecOps in
 - Waveform & Spectrogram Heatmap              - Standardized Markdown Ticket (.md)
 - Speaker Timeline & Trigger Callouts         - Containment Checklist (CERT NZ/Banks)
 
-## 🎯 Threat Coverage Matrix (NZ Context)
+Threat Category,Monitored Vectors & Indicators,Mitigation & Containment
+Banking Credentials & OTP,"NetCode, One-Time PIN, ANZ/ASB/BNZ/Westpac security teams",Immediate token revocation & mobile app session kill
+Remote Access Trojans (RAT),"AnyDesk, TeamViewer, QuickSupport, screen sharing",Host network isolation & forensic memory acquisition
+Government Impersonation,"Inland Revenue (IRD) tax audit, NZTA road toll arrears",Verification via independent outbound Government switchboard
+Authorized Push Payment (APP),"""Safe account"", immediate funds clearance, anti-money laundering hold",Beneficiary account freezing & bank fraud liaison
+Synthetic Audio / Voice Clone,"Abnormal energy >7.5 kHz, missing PSTN telephony rolloff",Secondary out-of-band identity challenge
 
-| Threat Category | Monitored Vectors & Indicators | Mitigation & Containment |
-| :--- | :--- | :--- |
-| **Banking Credentials & OTP** | NetCode, One-Time PIN, ANZ/ASB/BNZ/Westpac security teams | Immediate token revocation & mobile app session kill |
-| **Remote Access Trojans (RAT)** | AnyDesk, TeamViewer, QuickSupport, screen sharing | Host network isolation & forensic memory acquisition |
-| **Government Impersonation** | Inland Revenue (IRD) tax audit, NZTA road toll arrears | Verification via independent outbound Government switchboard |
-| **Authorized Push Payment (APP)**| "Safe account", immediate funds clearance, anti-money laundering hold | Beneficiary account freezing & bank fraud liaison |
-| **Synthetic Audio / Voice Clone**| Abnormal energy >7.5 kHz, missing PSTN telephony rolloff | Secondary out-of-band identity challenge |
+✨ Key Features
+Local & Privacy-Preserving: Operates 100% locally on Apple Silicon / CPU. No audio data leaves the local workstation.
 
- ## ✨ Key Features
+Native macOS Audio Ingestion: Leverages native afconvert pipelines to ingest Voice Memos (.m4a), compressed MP3s, and standard PCM formats without external dependencies.
 
-- **Local & Privacy-Preserving:** Operates 100% locally on Apple Silicon / CPU. No audio data leaves the local workstation.
-- **Native macOS Audio Ingestion:** Leverages native `afconvert` pipelines to ingest Voice Memos (`.m4a`), compressed MP3s, and standard PCM formats without external dependencies.
-- **NZ Banking Threat Profiles:** Detects domain-specific phrases including *NetCode*, *security department*, *AnyDesk/TeamViewer*, *unauthorized card charges*, and *IRD refund*.
-- **Real-Time Forensic Feedback:** Features an integrated progress callback pipeline providing live feedback during lengthy call recordings (e.g., 30+ minute streams).
-- **Incident Ticket Export:** Generates standardized Markdown reports compatible with SOC incident management workflows (Jira, ServiceNow, GitHub Security Advisories).
+NZ Banking Threat Profiles: Detects domain-specific phrases including NetCode, security department, AnyDesk/TeamViewer, unauthorized card charges, and IRD refund.
 
----
+Real-Time Forensic Feedback: Features an integrated progress callback pipeline providing live feedback during lengthy call recordings (e.g., 30+ minute streams).
 
-## 🚀 Quickstart Guide
+Incident Ticket Export: Generates standardized Markdown reports compatible with SOC incident management workflows (Jira, ServiceNow, GitHub Security Advisories).
 
-### 1. Prerequisites
-- macOS (Optimized for Apple Silicon M-Series) or Linux
-- Python 3.10 or higher
-- System audio tool (`afconvert` built into macOS)
+🚀 Quickstart Guide
+1. Prerequisites
+macOS (Optimized for Apple Silicon M-Series) or Linux
 
-### 2. Installation
+Python 3.10 or higher
+
+System audio tool (afconvert built into macOS)
+
+2. Installation
 Clone the repository and set up a virtual environment:
-
-```bash
 git clone [https://github.com/your-username/vishing-forensics-hub.git](https://github.com/your-username/vishing-forensics-hub.git)
 cd vishing-forensics-hub
 
@@ -109,12 +104,11 @@ pip install -r requirements.txt
 
 3. Run the Dashboard
 Launch the local forensics console:
-    bush
-        python3 -m streamlit run app/ui/dashboard.py
+    python3 -m streamlit run app/ui/dashboard.py
 Open your browser at http://localhost:8501.
 
 📂 Project Structure
-    vishing-forensics-hub/
+vishing-forensics-hub/
 ├── app/
 │   ├── core/
 │   │   └── pipeline.py           # Dual-track pipeline orchestration
@@ -133,5 +127,4 @@ Open your browser at http://localhost:8501.
 └── README.md
 
 🔒 Security & Privacy Notice
-    This platform is intended for defensive digital forensics, threat hunting, and educational research. Always ensure you have proper authorization or regulatory compliance before recording or analyzing telecommunication data.
-
+This platform is intended for defensive digital forensics, threat hunting, and educational research. Always ensure you have proper authorization or regulatory compliance before recording or analyzing telecommunication data.
