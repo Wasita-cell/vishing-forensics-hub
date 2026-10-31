@@ -68,7 +68,6 @@ This platform bridges the gap between raw telecom audio recordings and SecOps in
 - Waveform & Spectrogram Heatmap              - Standardized Markdown Ticket (.md)
 - Speaker Timeline & Trigger Callouts         - Containment Checklist (CERT NZ/Banks)
 
-```markdown
 ## 🎯 Threat Coverage Matrix (NZ Context)
 
 | Threat Category | Monitored Vectors & Indicators | Mitigation & Containment |
