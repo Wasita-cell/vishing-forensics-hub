@@ -31,40 +31,53 @@ This platform bridges the gap between raw telecom audio recordings and SecOps in
 
 ---
 
-## 🏗️ Architecture
-+----------------------------+
-                   |   Raw Audio Ingest (.m4a)  |
-                   +--------------+-------------+
-                                  |
-                           [afconvert]
-                   (16kHz Mono 16-bit PCM WAV)
-                                  |
-             +--------------------+--------------------+
-             |                                         |
-             v                                         v
-   [ Track A: Acoustic ]                     [ Track B: Semantic ]
- - SciPy Welch PSD                         - Faster-Whisper Local
- - Telephony Cutoff (7.5kHz)               - Real-time Progress Tracking
- - High-Frequency Energy Ratio             - NZ Threat Vector Heuristics
-             |                                         |
-             +--------------------+--------------------+
-                                  |
-                   [ Track C: Speaker Clustering ]
-                 - Lightweight 2-Means Diarization
-                 - Dynamic Threat Attribution
-                                  |
-                                  v
-                    +---------------------------+
-                    |  Dual-Track Correlation   |
-                    |   Risk Score (0 - 100)    |
-                    +-------------+-------------+
-                                  |
-             +--------------------+--------------------+
-             |                                         |
-             v                                         v
-   [ Interactive Dashboard ]                 [ SecOps Ticket Export ]
- - Waveform & Spectrogram Plots            - Standardized .md Report
- - Diarized Timeline & Badges              - Incident Containment Steps
+## 🏗️ Technical Architecture & Pipeline
+
+```text
+       Incoming Raw Audio Stream (.m4a, .mp3, .wav, .aiff)
+                                |
+                                v
+                [ Native Audio Normalization Engine ]
+             macOS afconvert -> 16kHz Mono 16-bit PCM WAV
+                                |
+         +----------------------+----------------------+
+         |                                             |
+         v                                             v
+  [ Track A: Signal Domain ]               [ Track B: Semantic Domain ]
+  - SciPy Welch Power Spectral Density     - Faster-Whisper (Quantized int8)
+  - PSTN Cutoff Edge Detection (~7.5 kHz)  - Streaming Progress Engine
+  - High-Frequency (HF) Energy Ratio       - NZ Banking Threat Rulebase
+  - Synthetic / TTS Suspicion Score        - Urgency & Coercion NLP Heuristics
+         |                                             |
+         +----------------------+----------------------+
+                                |
+                                v
+               [ Track C: Lightweight Diarization ]
+             - Acoustic Feature Extraction (RMS + ZCR + PSD)
+             - 2-Means Cluster Separation (SPEAKER_00 vs SPEAKER_01)
+             - Threat Attribution (Maps malicious triggers -> SCAMMER role)
+                                |
+                                v
+            [ Dual-Track Correlation & Risk Assessment ]
+         Combined Score = (0.60 * Semantic) + (0.40 * Acoustic)
+                                |
+         +----------------------+----------------------+
+         |                                             |
+         v                                             v
+[ SOC Analyst Dashboard ]                     [ Incident Response Artifact ]
+- Waveform & Spectrogram Heatmap              - Standardized Markdown Ticket (.md)
+- Speaker Timeline & Trigger Callouts         - Containment Checklist (CERT NZ/Banks)
+
+```markdown
+## 🎯 Threat Coverage Matrix (NZ Context)
+
+| Threat Category | Monitored Vectors & Indicators | Mitigation & Containment |
+| :--- | :--- | :--- |
+| **Banking Credentials & OTP** | NetCode, One-Time PIN, ANZ/ASB/BNZ/Westpac security teams | Immediate token revocation & mobile app session kill |
+| **Remote Access Trojans (RAT)** | AnyDesk, TeamViewer, QuickSupport, screen sharing | Host network isolation & forensic memory acquisition |
+| **Government Impersonation** | Inland Revenue (IRD) tax audit, NZTA road toll arrears | Verification via independent outbound Government switchboard |
+| **Authorized Push Payment (APP)**| "Safe account", immediate funds clearance, anti-money laundering hold | Beneficiary account freezing & bank fraud liaison |
+| **Synthetic Audio / Voice Clone**| Abnormal energy >7.5 kHz, missing PSTN telephony rolloff | Secondary out-of-band identity challenge |
 
  ## ✨ Key Features
 
